@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { ServerConfig, EmailConfig } = require("./config");
+const { ServerConfig } = require("./config");
 const apiRoutes = require("./routes");
 
 const app = express();
@@ -16,17 +16,5 @@ app.use("/api", apiRoutes);
 
 app.listen(ServerConfig.PORT, async () => {
     console.log(`Server is up and running on PORT ${ServerConfig.PORT}`);
-    try {
-        const response = await EmailConfig.sendMail({
-            from: ServerConfig.GMAIL_EMAIL,
-            to: "arunrawatar404@gmail.com",
-            subject: "Checking the service again",
-            text: "Yes it is working"
-        });
-        console.log(response);
-    } catch (error) {
-        console.log(error);
-    }
-
 });
 
